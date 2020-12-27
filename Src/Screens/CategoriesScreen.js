@@ -125,11 +125,12 @@ const CategoriesScreen = ({navigation}) => {
   }
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: Colors.white}}>
       <View
         style={{
           width: Dimensions.width,
-          height: Dimensions.height * 0.4,
+          height: Dimensions.height * 0.35,
+          marginBottom: Dimensions.height * 0.01,
         }}>
         <Carousel
           data={News}
@@ -206,6 +207,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: Colors.white,
   },
   errmsg: {
     fontSize: ResponsiveFont(18),

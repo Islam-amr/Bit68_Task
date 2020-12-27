@@ -203,8 +203,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   btnStyle: {
-    width: '50%',
-    height: '45%',
+    width: Dimensions.width * 0.12,
+    height: Dimensions.width * 0.12,
     backgroundColor: Colors.primary,
     borderRadius: 100,
     justifyContent: 'center',

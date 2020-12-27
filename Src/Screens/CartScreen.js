@@ -49,16 +49,22 @@ const CartScreen = ({navigation}) => {
     });
   }, []);
 
-  
-
-  const onDelete = useCallback((id) => {
-    disptach(cartActions.removeFromCart(id));
-  }, [cartItems]);
-
+  const onDelete = useCallback(
+    (id) => {
+      disptach(cartActions.removeFromCart(id));
+    },
+    [cartItems],
+  );
 
   if (cartItems.length === 0) {
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: Colors.white,
+        }}>
         <Image
           style={styles.emptyCartimg}
           source={require('../Assets/Images/emptyCart.png')}
@@ -69,7 +75,12 @@ const CartScreen = ({navigation}) => {
   }
   return (
     <>
-      <ScrollView style={{flex: 1}}>
+      <ScrollView
+        style={{
+          flex: 1,
+          backgroundColor: Colors.white,
+          paddingVertical: Dimensions.height * 0.02,
+        }}>
         <View style={styles.cartItemCon}>
           <View style={styles.descCon}>
             <View style={styles.rowCon}>
@@ -104,7 +115,7 @@ const CartScreen = ({navigation}) => {
                   ]}>
                   <Image
                     style={styles.deleteIcon}
-                    source={require('../Assets/Icons/delete.png')}
+                    source={require('../Assets/Icons/trash.png')}
                   />
                 </TouchableOpacity>
               </View>
@@ -132,7 +143,7 @@ const styles = StyleSheet.create({
     color: Colors.primary,
     fontFamily: Fonts.Poppins_SemiBold,
     fontSize: ResponsiveFont(20),
-    lineHeight:35
+    lineHeight: 35,
   },
   iconStyle: {
     width: Dimensions.width * 0.07,
@@ -154,6 +165,7 @@ const styles = StyleSheet.create({
     elevation: 2,
     alignSelf: 'center',
     padding: 15,
+    margin: 5,
   },
   descCon: {
     width: '100%',

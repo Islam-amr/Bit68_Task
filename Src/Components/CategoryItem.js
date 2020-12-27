@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     shadowColor: 'grey',
     shadowOpacity: 0.6,
     shadowRadius: 12,
-    elevation: 8,
+    elevation: 3,
   },
   categoryImg: {
     width: '100%',

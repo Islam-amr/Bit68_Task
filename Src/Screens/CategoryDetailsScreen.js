@@ -83,10 +83,11 @@ const CategoryDetailsScreen = ({navigation, route}) => {
     });
   }, [cartItems]);
 
-
   return (
     <>
-      <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={{flex: 1, backgroundColor: Colors.white}}
+        showsVerticalScrollIndicator={false}>
         <View style={styles.imgCon}>
           <Image style={styles.img} source={{uri: item.product_img}} />
         </View>

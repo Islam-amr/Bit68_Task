@@ -63,21 +63,23 @@ const ProductItem = ({item, index}) => {
 
 const styles = StyleSheet.create({
   itemCon: {
-    height: Dimensions.height * 0.25,
     flex: 1,
     borderBottomColor: Colors.lightGray,
     borderRightColor: Colors.lightGray,
     borderRightWidth: 1,
     borderBottomWidth: 1,
-    paddingVertical: Dimensions.height * 0.001,
+    paddingVertical: Dimensions.height * 0.000001,
+    backgroundColor: Colors.white,
   },
   imgCon: {
-    flex: 0.65,
+    flex: 1,
+    height: Dimensions.height * 0.2,
+    alignItems: 'center',
   },
   img: {
     width: '100%',
     height: '100%',
-    resizeMode: 'contain',
+    resizeMode: 'cover',
   },
   actionCon: {
     flex: 0.35,
@@ -92,8 +94,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   addBtn: {
-    width: '40%',
-    height: '60%',
+    width: Dimensions.width * 0.1,
+    height: Dimensions.width * 0.1,
     marginRight: '15%',
     borderRadius: 1000,
     justifyContent: 'center',

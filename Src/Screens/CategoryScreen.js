@@ -27,7 +27,6 @@ const CategoryScreen = ({navigation, route}) => {
     });
   }, []);
 
-
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -75,6 +74,7 @@ const CategoryScreen = ({navigation, route}) => {
         </View>
         <View style={styles.productsCon}>
           <FlatList
+            showsVerticalScrollIndicator={false}
             numColumns={2}
             data={item.products}
             keyExtractor={(item) => item.id}
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   imgCon: {
     width: Dimensions.width,
-    height: Dimensions.height * 0.4,
+    height: Dimensions.height * 0.35,
   },
   img: {
     width: '100%',
@@ -129,11 +129,9 @@ const styles = StyleSheet.create({
   },
   productsCon: {
     width: Dimensions.width,
-    height: Dimensions.height * 0.6,
-    paddingHorizontal: Dimensions.width * 0.025,
+    height: Dimensions.height * 0.57,
   },
   actionCon: {
-    position: 'absolute',
     width: '100%',
     height: Dimensions.height * 0.08,
     backgroundColor: Colors.primary,

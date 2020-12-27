@@ -8,7 +8,6 @@ import {
   FlatList,
   Keyboard,
 } from 'react-native';
-import {useFocusEffect} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 
 // Componenets import
@@ -23,8 +22,16 @@ import ResponsiveFont from '../Constants/ResponsiveFont';
 const SearchScreen = ({navigation}) => {
   const [touched, setTouched] = useState(false);
   const [searchWord, setSearchWord] = useState('');
-  const [searchResult, setSearchResult] = useState([]);
+  const [result, setResult] = useState('');
   const categories = useSelector((state) => state.Categories.availableProducts);
+  let filter =
+    searchWord.length === 0
+      ? []
+      : categories.filter(
+          (item) =>
+            item.name.toLowerCase().match(searchWord) ||
+            item.products.find((i) => i.name.toLowerCase().match(searchWord)),
+        );
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -34,20 +41,19 @@ const SearchScreen = ({navigation}) => {
     });
   }, []);
 
-  const handleSearch = useCallback(
+  const handleSubmit = useCallback(
     (text) => {
-      setSearchWord(text);
-      if (text.length === 0) {
-        setSearchResult([]);
-        return;
-      }
-      setSearchResult(
-        categories.filter(
-          (item) =>
-            item.name.toLowerCase().match(text) ||
-            item.products.find((i) => i.name.toLowerCase().match(text)),
-        ),
+      const newData = categories.filter(
+        (item) =>
+          item.name.toLowerCase().match(text) ||
+          item.products.find((i) => i.name.toLowerCase().match(text)),
       );
+
+      setSearchWord(text);
+      setResult(newData);
+      if (text.length === 0) {
+        setResult([]);
+      }
     },
     [searchWord],
   );
@@ -56,30 +62,23 @@ const SearchScreen = ({navigation}) => {
     setTouched(true);
   };
 
-  useFocusEffect(
-    useCallback(() => {
-      const subscribe = setSearchResult([]);
-      return () => subscribe;
-    }, []),
-  );
-
-  console.log(touched);
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: Colors.white}}>
         <View style={styles.inputCon}>
           <TextInput
             placeholder="Type your category"
             style={styles.input}
+            autoCapitalize={'none'}
             value={searchWord}
             onBlur={touchHandle}
-            onChangeText={handleSearch}
+            onChangeText={handleSubmit}
           />
         </View>
-        {searchResult.length !== 0 && (
+        {result.length !== 0 && (
           <View style={styles.categoriesCon}>
             <FlatList
-              data={searchResult}
+              data={result}
               showsVerticalScrollIndicator={false}
               numColumns={2}
               keyExtractor={(item) => item.id}
@@ -87,7 +86,7 @@ const SearchScreen = ({navigation}) => {
             />
           </View>
         )}
-        {touched && searchResult.length === 0 && (
+        {touched && result.length === 0 && (
           <View style={styles.noResultCon}>
             <Text style={styles.noResultTxt}>No result found !</Text>
           </View>
